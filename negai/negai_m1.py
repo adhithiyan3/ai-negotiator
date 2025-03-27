@@ -22,11 +22,11 @@ def fetch_historical_data(product_name: str):
     except Exception as e:
         return None
 
-def generate_price_range(product_name, mentioned_price, affordable_price):
-    historical_data = fetch_historical_data(product_name) or {"average_price": mentioned_price * 0.9, "trend": 1.0, "demand": 1.0}
-    avg_price = historical_data["average_price"]
-    trend_factor = historical_data["trend"]
-    demand_factor = historical_data["demand"]
+def generate_price_range(product_name, mentioned_price, affordable_price,historical_data):
+    historical_datas = historical_data or {"average_price": mentioned_price * 0.9, "trend": 1.0, "demand": 1.0}
+    avg_price = historical_datas["average_price"]
+    trend_factor = historical_datas["trend"]
+    demand_factor = historical_datas["demand"]
     
     min_price = max(affordable_price, avg_price * 0.9 * trend_factor)
     max_price = min(mentioned_price, avg_price * 1.1 * demand_factor)
@@ -40,7 +40,7 @@ def generate_negotiation_message(product_name, buyer_offer):
 
 @app.post("/negotiate")
 def negotiate(request: NegotiationRequest):
-    min_price, max_price = generate_price_range(request.product_name, request.mentioned_price, request.affordable_price)
+    min_price, max_price = generate_price_range(request.product_name, request.mentioned_price, request.affordable_price,request.historical_data)
     
     buyer_offer = request.affordable_price  
     
