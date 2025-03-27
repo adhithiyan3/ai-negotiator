@@ -5,7 +5,7 @@ const app = express();
 require("dotenv").config();
 mongoose.connect(process.env.MongoUrl);
 const { UserAuthWare } = require("./middleware/userauth");
-const cors = require("cors");
+
 // router files
 const { UserRouter } = require("./routes/user");
 const { NegoRouter } = require("./routes/nego")
