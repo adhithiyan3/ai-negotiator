@@ -5,7 +5,8 @@ const API_BASE_URL = "http://localhost:5000/users";
 export const loginUser = async (email, password) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/signin`, { email, password });
-    console.log(response.data);
+      // console.log(response.data);
+      localStorage.setItem("token", response.data.token);
       return response.data;
   } catch (error) {
     throw error.response?.data?.message || "Login failed";

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { InitializeChat } from "./api/main";
 
 const NegotiationForm = ({ onStartChat }) => {
   const [formData, setFormData] = useState({
@@ -16,14 +17,9 @@ const NegotiationForm = ({ onStartChat }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/negotiate/request", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    const data = await response.json();
-    setChatLink(data.link);
-    onStartChat(data.link);
+    const link = await InitializeChat(formData);
+    setChatLink(link);
+    onStartChat(link);
   };
 
   return (
