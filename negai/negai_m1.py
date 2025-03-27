@@ -22,11 +22,19 @@ def fetch_historical_data(product_name: str):
     except Exception as e:
         return None
 
+<<<<<<< HEAD
 def generate_price_range(product_name, mentioned_price, affordable_price,historical_data):
     historical_datas = historical_data or {"average_price": mentioned_price * 0.9, "trend": 1.0, "demand": 1.0}
     avg_price = historical_datas["average_price"]
     trend_factor = historical_datas["trend"]
     demand_factor = historical_datas["demand"]
+=======
+def generate_price_range(product_name, mentioned_price, affordable_price):
+    #historical_data = fetch_historical_data(product_name) or {"average_price": mentioned_price * 0.9, "trend": 1.0, "demand": 1.0}
+    avg_price = historical_data["average_price"]
+    trend_factor = historical_data["trend"]
+    demand_factor = historical_data["demand"]
+>>>>>>> f0f58032160d97b11b998a2e62d4ec7a8fc5ebb0
     
     min_price = max(affordable_price, avg_price * 0.9 * trend_factor)
     max_price = min(mentioned_price, avg_price * 1.1 * demand_factor)
