@@ -9,7 +9,11 @@ const cors = require("cors");
 // router files
 const { UserRouter } = require("./routes/user");
 const { NegoRouter } = require("./routes/nego")
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(express.json()); //json middleware
 app.use("/users", UserRouter);
 app.use(UserAuthWare);
