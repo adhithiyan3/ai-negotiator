@@ -33,9 +33,6 @@ const MessageSchema = new mongoose.Schema({
 });
 
 
-
-
-
 const NegotiationModel = mongoose.model("Negotiation", NegotiationSchema);
 const MessageModel = mongoose.model("Messages", MessageSchema);
 

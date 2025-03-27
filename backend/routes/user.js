@@ -36,7 +36,6 @@ UserRouter.post("/signup", async (req, res) => {
       // seller retuen res
       return res.status(201).json({
         message: "seller sign up successfull",
-        token: token,
       });
     }
     //create
@@ -47,15 +46,9 @@ UserRouter.post("/signup", async (req, res) => {
       password: password,
       createdAt: Date.now(),
     });
-
-    const token = jwt.sign({ id: NewUser._id, role }, UserJwtToc, {
-      expiresIn: "1d",
-    });
-
     //   user response
     res.status(201).json({
       message: `buyer sign up successfull`,
-      token: token,
     });
   } catch (err) {
     // invalid credientails
@@ -67,12 +60,12 @@ UserRouter.post("/signup", async (req, res) => {
 });
 
 UserRouter.post("/signin", async (req, res) => {
-  const { email, phone, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Check if user exists in BuyerModel or SellerModel
-    const buyer = await BuyerModel.findOne({ email, phone, password });
-    const seller = await SellerModel.findOne({ email, phone, password });
+    const buyer = await BuyerModel.findOne({ email, password });
+    const seller = await SellerModel.findOne({ email, password });
 
     if (!buyer && !seller) {
       return res.status(401).json({ message: "Invalid credentials" });
