@@ -23,7 +23,7 @@ def fetch_historical_data(product_name: str):
         return None
 
 def generate_price_range(product_name, mentioned_price, affordable_price):
-    historical_data = fetch_historical_data(product_name) or {"average_price": mentioned_price * 0.9, "trend": 1.0, "demand": 1.0}
+    #historical_data = fetch_historical_data(product_name) or {"average_price": mentioned_price * 0.9, "trend": 1.0, "demand": 1.0}
     avg_price = historical_data["average_price"]
     trend_factor = historical_data["trend"]
     demand_factor = historical_data["demand"]
