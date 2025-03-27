@@ -1,0 +1,19 @@
+// node dependences
+const express = require("express");
+const mongoose = require("mongoose");
+const app = express();
+require("dotenv").config();
+mongoose.connect(process.env.MongoUrl);
+const { UserAuthWare } = require("./middleware/userauth");
+
+// router files
+const { UserRouter } = require("./routes/user");
+const{ NegoRouter } = require("./routes/nego")
+app.use(express.json()); //json middleware
+app.use("/users", UserRouter);
+app.use(UserAuthWare);
+app.use("/negotiate", NegoRouter);
+
+app.listen(5000, () => {
+  console.log("Server is Running !");
+});
