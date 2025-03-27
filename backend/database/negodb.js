@@ -21,11 +21,27 @@ const NegotiationSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+const MessageSchema = new mongoose.Schema({
+  negotiationId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Negotiation",
+    required: true,
+  },
+  sender: { type: String, enum: ["AI", "Seller"], required: true },
+  message: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+});
+
+
+
+
 
 const NegotiationModel = mongoose.model("Negotiation", NegotiationSchema);
+const MessageModel = mongoose.model("Messages", MessageSchema);
 
 
 module.exports = {
   NegotiationModel: NegotiationModel,
+  MessageModel: MessageModel,
 };
 
